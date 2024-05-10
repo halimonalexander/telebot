@@ -2,7 +2,6 @@ package files
 
 import (
 	"encoding/gob"
-	"errors"
 	"fmt"
 	"math/rand"
 	"os"
@@ -10,8 +9,6 @@ import (
 	"telebot/lib/e"
 	"telebot/storage"
 )
-
-var ErrorNoSavedPages = errors.New("no saved pages")
 
 type Storage struct {
 	basePath string
@@ -60,7 +57,7 @@ func (s Storage) PickRandom(username string) (*storage.Page, error) {
 	}
 
 	if len(files) == 0 {
-		return nil, ErrorNoSavedPages
+		return nil, storage.ErrorNoSavedPages
 	}
 
 	n := rand.Intn(len(files))
